@@ -1,5 +1,4 @@
-use chrono::{NaiveDate, NaiveDateTime};
-
+use chrono::NaiveDate;
 fn main() {
 }
 
@@ -32,7 +31,7 @@ fn timeline(changes: &[(NaiveDate, f32)], start_date: &NaiveDate, end_date: &Nai
 
     for &(ref change_date, value) in changes {
         if change_date >= start_date {
-            while current_date < *change_date {
+            while current_date < *change_date { // had to add * here
                 filled_values.push((current_date.clone(), current_value));
                 current_date = current_date.succ();
             }
@@ -43,14 +42,13 @@ fn timeline(changes: &[(NaiveDate, f32)], start_date: &NaiveDate, end_date: &Nai
     }
 
     // Add the final value for the end date
-    while current_date <= *end_date {
+    while current_date <= *end_date { // had to add * here
         filled_values.push((current_date.clone(), current_value));
         current_date = current_date.succ();
     }
 
     filled_values
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -139,3 +137,4 @@ mod tests {
         );
     }
 }
+
